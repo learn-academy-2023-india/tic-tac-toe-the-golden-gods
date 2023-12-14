@@ -63,7 +63,7 @@ There is an interesting approach to the [Tic Tac Toe win condition in React](htt
 
 **Acceptance Criteria**
 
-- Can see a three-by-three grid game board
+- Can see a three-by-three grid game board - bitch
 - Player one can click on a square to mark it with an X
 - Player two can click on a square to mark it with an O
 - Players cannot click on a square that has already been marked
