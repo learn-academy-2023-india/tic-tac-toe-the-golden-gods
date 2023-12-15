@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
-import Square from './components/Square';
-import './App.css';
+import React, { useState } from 'react'
+import Square from './components/Square'
+import './App.css'
 
 const App = () => {
-  const [board, setBoard] = useState(Array(9).fill(null));
-  const [whoNext, setWhoNext] = useState(true);
+  const [board, setBoard] = useState(Array(9).fill(null))
+  const [whoNext, setWhoNext] = useState(true)
 
   const calcWinner = (squares) => {
     const combo = [
@@ -16,36 +16,42 @@ const App = () => {
       [2, 5, 8],
       [0, 4, 8],
       [2, 4, 6],
-    ];
+    ]
 
     for (let i = 0; i < combo.length; i++) {
-      const [a, b, c] = combo[i];
+      const [a, b, c] = combo[i]
       if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-        return squares[a];
+        return squares[a]
       }
     }
-    return null;
-  };
+    return null
+  }
 
   const handleClick = (index) => {
-    const squares = [...board];
+    const squares = [...board]
 
     if (calcWinner(squares) || squares[index]) {
-      return;
+      return
     }
 
-    squares[index] = whoNext ? '❎' : '🅾️';
-    setBoard(squares);
-    setWhoNext(!whoNext);
-  };
+    squares[index] = whoNext ? '❎' : '🅾️'
+    setBoard(squares)
+    setWhoNext(!whoNext)
+  }
 
   const renderSquare = (index) => {
-    return <Square value={board[index]} onClick={() => handleClick(index)} />;
-  };
+    return <Square value={board[index]} onClick={() => handleClick(index)} />
+  }
 
-  const winner = calcWinner(board);
-  const status = winner ? `Winner is ${winner}` : `${whoNext ? '❎' : '🅾️'} is next`;
+  const winner = calcWinner(board)
+  const status = winner ? `Winner is ${winner}` : `${whoNext ? '❎' : '🅾️'} is next`
 
+  //Handle click event for the restart button
+const handleRestart = () => {
+  // reset the squares array and player turn
+  setBoard(Array(9).fill(null))
+  setWhoNext(true)
+}
   return (
     <div className="background">
       <h1 className="title">Tic Tac Toe</h1>
@@ -65,25 +71,12 @@ const App = () => {
         {renderSquare(7)}
         {renderSquare(8)}
       </div>
-    </div>
-  )
-
-  //Handle click event for the restart button
-const handleRestart = () => {
-  // reset the squares array and player turn
-  setSquares(Array(9).fill(null))
-  setWhoNext(true)
-}
-// Return JSX for the game status
-return
-  <div className='game'>
-    <div className='status'>{status}</div>
-    <Board squares={squares} onClick={handleClick} />
-
-    <button className='restart' onClick={handleClick}>
+      <button className='restart' onClick={handleRestart}>
     Restart
     </button>
     </div>
+  )
+
 }
 
 export default App
